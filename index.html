@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="skeleton.css">
-    <link rel="stylesheet" href="normalize.css">
-    <title>MelodyMatch - Find your beat</title>
-</head>
-<body>
-<!--Header and icon-->
-    <header>  
-<img src="logo.png" alt="Melody Match logo" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
 
-<!--Search bars
+    <title>MelodyMatch - Find your beat</title>
+  </head>
+  <body>
+    <!--Header and icon-->
+    <header>
+      <img src="./assets/logo.png" alt="Melody Match logo" />
+    </header>
+    <!--Search bars
 
 <div class="searchbar">
     
@@ -24,7 +23,7 @@
 
 -->
 
-<!--<div class="font-sans text-black min-h-screen bg-white flex items-center justify-center">
+    <!--<div class="font-sans text-black min-h-screen bg-white flex items-center justify-center">
     <div class="border rounded overflow-hidden flex">
       <input type="text" class="px-4 py-2" placeholder="Search for your favourite song...">
       <button class="flex items-center justify-center px-4 border-l">     
@@ -40,24 +39,15 @@
     </div>
   </div>-->
 
-
-  <div class="row">
-    
-      <input class="u-full-width" type="email" placeholder="Search for the lyrics in your mind..." id="exampleEmailInput">
-      <button class=" button-primary">Button element</button>
-      
-    </div>  
-
-
-
-
-    </header>
-
-    
-
+    <div class="search-input">
+      <input
+        placeholder="Search for the lyrics in your mind..."
+        id="song-input"
+      />
+      <button id="search-btn">Search</button>
+    </div>
 
     <!--JavaScript-->
     <script src="script.js"></script>
-
-    </body>
+  </body>
 </html>
