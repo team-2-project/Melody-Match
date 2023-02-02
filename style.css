@@ -32,21 +32,30 @@ margin-right: auto;
 }
 
 
+.search-input {
+  display:flex;
+  justify-content: center;
+
+}
+
+button {
+  margin: 50px 0 50px 0;
+  }
 
   input {
     background: rgba(255,255,255,0.4);
     border: none;
-    position: relative;
-    display: block;
+    /* position: relative;
+    display: block; */
     outline: none;
     width: 400px;
     height: 30px;
     top: 40px;
-    margin-left: 380px;
+    margin: 50px 0 50px 0;
     padding: 10px;
     color: #333;
-    -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
-    box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+    /* -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5); */
   }
 
   ::-webkit-input-placeholder { color: #ff841b;} 
