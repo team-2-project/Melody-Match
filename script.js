@@ -18,27 +18,29 @@ var clearAll = function () {
     while (similarVideos.childNodes.length > 2) {
         similarVideos.removeChild(similarVideos.lastChild)
     }
+
     album.src = '';
 }
 
 var saveHistory = function (songArtist) {
   localStorage.setItem("saveHistory", JSON.stringify(songArtist));
 }
+
 var buttonText = function() {
   return localStorage.getItem("saveHistory");
 }
 
-// Appends a clickable button with a search history that will search again for the text content of the button. The only problem atm is when the button is clicked, it appends an additional element of the same text content !!!!! fix tbd
+// Appends a clickable button with a search history that will search again for the text content of the button. 
 var historyButton = function () {
   var buttonContent = buttonText();
   var buttonEl = document.createElement("button");
   buttonEl.textContent = buttonContent;
-  
   buttonEl.addEventListener("click", clearAll)
   buttonEl.addEventListener("click", fetchAPI2)
   searchHx.appendChild(buttonEl);
 }
 
+// This function calls upon the shazam api first to get the search results of the lyrics and then within the same scope, calls the youtube api and inserts the found song + artist to the youtube search for more accuracy
 var fetchAPI = function() {
 
     var lyrics = input.value;
@@ -97,21 +99,22 @@ var fetchAPI = function() {
     });
 }
 
-var clickSearch = function () {
-  button.addEventListener("click", startFunction)
-}
-
-// Function to be used by the search button and any buttons created by history
+// This function clears all the fields and then calls the fetchAPI function
 var startFunction = function (e) {
   e.preventDefault();
   clearAll();
   fetchAPI();
 }
 
+// on button click, call the startFunction()
+var clickSearch = function () {
+  button.addEventListener("click", startFunction)
+}
+
 clickSearch();
 
 
-// I just duplicated this function with the 'this' keyword cause I can't figure out how to consolidate it yet
+// I just duplicated this function with the 'this' keyword cause I can't figure out how to consolidate it yet. !!!! TBD !!!!
 var fetchAPI2 = function() {
   
   var lyrics = this.textContent;
@@ -128,7 +131,6 @@ var fetchAPI2 = function() {
   fetch("https://shazam.p.rapidapi.com/search?term=" + lyrics + "&locale=en-US&offset=0&limit=5", options).then(response => response.json())
   .then(function(response) {
     
-      
     songTitle.textContent = "The lyrics you searched for is " + response.tracks.hits[0].track.title + " by " + response.artists.hits[0].artist.name;
     
     album.src = response.artists.hits[0].artist.avatar;
@@ -170,19 +172,3 @@ var fetchAPI2 = function() {
   });
 }
 
-
-
-
-
-
-//search for repeats in search history and delete so only appears once
-//  !!!!! NOT WORKING !!!!
-// var deleteDuplicate = function() {
-//   var savedHistory = buttonText();
-//   for (var i = 0; i < allButtons.length; i++) {
-//     if (savedHistory === allButtons[i].textContent) {
-//       allButtons[i].remove();
-
-//     }
-//   }
-// }
