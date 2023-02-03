@@ -1,18 +1,20 @@
 var youtubeAPI = 'AIzaSyD7nJxKnVnhFHxNBUFHLydxK245aU2usOM';
 var button = document.querySelector('#search-btn');
-var mainVideo = document.querySelector('#main-video')
+var mainVideo = document.querySelector('#main-video');
 var similarVideos = document.querySelector('#similar-videos');
 var h2Element = document.querySelector("#similar-videos h2");
 var songInfo = document.querySelector("#song-info");
-var album = document.querySelector('#album-art')
+var songTitle = document.querySelector("#song-title")
+var album = document.querySelector('#album-art');
+
 
 
 var clearAll = function () {
-    while (mainVideo.childNodes.length > 2) {
+    while (mainVideo.childNodes.length > 1) {
         mainVideo.removeChild(mainVideo.lastChild)
     }
 
-    while (similarVideos.childNodes.length > 2) {
+    while (similarVideos.childNodes.length > 1) {
         similarVideos.removeChild(similarVideos.lastChild)
     }
 
@@ -38,9 +40,9 @@ button.addEventListener("click", function (e) {
     fetch("https://shazam.p.rapidapi.com/search?term=" + lyrics + "&locale=en-US&offset=0&limit=5", options).then(response => response.json())
     .then(function(response) {
       
-        var songName = document.createElement("h2");
-      songName.textContent = "The lyrics you searched for is " + response.tracks.hits[0].track.title + " by " + response.artists.hits[0].artist.name;
-        songInfo.appendChild(songName);
+        
+      songTitle.textContent = "The lyrics you searched for is " + response.tracks.hits[0].track.title + " by " + response.artists.hits[0].artist.name;
+        
     
       
       album.src = response.artists.hits[0].artist.avatar;
