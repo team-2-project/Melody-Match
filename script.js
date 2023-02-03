@@ -10,11 +10,11 @@ var album = document.querySelector('#album-art');
 
 
 var clearAll = function () {
-    while (mainVideo.childNodes.length > 1) {
+    while (mainVideo.childNodes.length > 2) {
         mainVideo.removeChild(mainVideo.lastChild)
     }
 
-    while (similarVideos.childNodes.length > 1) {
+    while (similarVideos.childNodes.length > 2) {
         similarVideos.removeChild(similarVideos.lastChild)
     }
 
