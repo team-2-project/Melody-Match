@@ -10,7 +10,7 @@ var album = document.querySelector('#album-art');
 
 
 var clearAll = function () {
-    while (mainVideo.childNodes.length > 2) {
+    while (mainVideo.childNodes.length > 1) {
         mainVideo.removeChild(mainVideo.lastChild)
     }
 
@@ -46,7 +46,7 @@ button.addEventListener("click", function (e) {
     
       
       album.src = response.artists.hits[0].artist.avatar;
-      songInfo.appendChild(album);
+      
 
 
       return fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + response.tracks.hits[0].track.title + response.artists.hits[0].artist.name + "&type=video&key=" + youtubeAPI)
