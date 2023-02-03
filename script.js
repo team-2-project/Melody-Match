@@ -33,7 +33,6 @@ var historyButton = function () {
   var buttonContent = buttonText();
   var buttonEl = document.createElement("button");
   buttonEl.textContent = buttonContent;
-  buttonEl.setAttribute("style", "padding: 20px; color: black;")
   buttonEl.addEventListener("click", clearAll)
   buttonEl.addEventListener("click", fetchAPI2)
   searchHx.appendChild(buttonEl);
