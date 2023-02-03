@@ -33,6 +33,7 @@ var historyButton = function () {
   var buttonContent = buttonText();
   var buttonEl = document.createElement("button");
   buttonEl.textContent = buttonContent;
+  
   buttonEl.addEventListener("click", clearAll)
   buttonEl.addEventListener("click", fetchAPI2)
   searchHx.appendChild(buttonEl);
@@ -134,7 +135,7 @@ var fetchAPI2 = function() {
     
     // Call the saveHistory function to save track and artist to localStorage
     saveHistory(response.tracks.hits[0].track.title + " by " + response.artists.hits[0].artist.name);
-    historyButton();
+    
 
     // Call the Youtube API fetch within the shazam API so we can use the shazam variables inside youtube API
     return fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + response.tracks.hits[0].track.title + response.artists.hits[0].artist.name + "&type=video&key=" + youtubeAPI)
