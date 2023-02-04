@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyD7nJxKnVnhFHxNBUFHLydxK245aU2usOM";
+var youtubeAPI = "AIzaSyCNYjluDnJK5CcflJ-sYsoRDzlUTNgLTo0";
 var button = document.querySelector("#search-btn");
 var mainVideo = document.querySelector("#main-video");
 var similarVideos = document.querySelector("#similar-videos");
@@ -54,7 +54,6 @@ var historyButton = function () {
 var fetchAPI = function () {
   var lyrics = input.value;
   console.log(lyrics);
-
 
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
