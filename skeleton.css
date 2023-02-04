@@ -29,7 +29,7 @@
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
-  position: relative;
+    position: relative;
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
@@ -38,7 +38,7 @@
 .column,
 .columns {
   width: 100%;
-  float: left;
+  
   box-sizing: border-box; }
 
 /* For devices larger than 400px */
@@ -53,11 +53,11 @@
   .container {
     width: 80%; }
   .column,
-  .columns {
-    margin-left: 4%; }
-  .column:first-child,
-  .columns:first-child {
-    margin-left: 0; }
+  /* .columns {
+    margin-left: 4%; } */
+  /* .column:first-child,
+  /* .columns:first-child {
+    margin-left: 0; } */ */
 
   .one.column,
   .one.columns                    { width: 4.66666666667%; }
@@ -71,7 +71,7 @@
   .nine.columns                   { width: 74.0%;          }
   .ten.columns                    { width: 82.6666666667%; }
   .eleven.columns                 { width: 91.3333333333%; }
-  .twelve.columns                 { width: 100%; margin-left: 0; }
+  .twelve.columns                 { width: 100%; }
 
   .one-third.column               { width: 30.6666666667%; }
   .two-thirds.column              { width: 65.3333333333%; }
@@ -171,19 +171,19 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   display: inline-block;
-  height: 38px;
-  padding: 0 30px;
+  height: 40px;
+  padding: 0 10px;
   color: #555;
   text-align: center;
   font-size: 11px;
   font-weight: 600;
-  line-height: 38px;
+  /* line-height: 40px; */
   letter-spacing: .1rem;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box; }
@@ -191,23 +191,24 @@ input[type="button"] {
 button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
-input[type="button"]:hover,
+input[type="button"]:hover{
+  color: #333333;
+  border-color: #000000;
+  background-color: #ff8c34;
+  outline: 0; }
 .button:focus,
 button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
-input[type="button"]:focus {
-  color: #333;
-  border-color: #888;
-  outline: 0; }
+input[type="button"]:focus,
 .button.button-primary,
 button.button-primary,
 input[type="submit"].button-primary,
 input[type="reset"].button-primary,
-input[type="button"].button-primary {
+/* input[type="button"].button-primary {
   color: #FFF;
   background-color: #33C3F0;
-  border-color: #33C3F0; }
+  border-color: #33C3F0; } */
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
@@ -217,10 +218,10 @@ input[type="button"].button-primary:hover,
 button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
-input[type="button"].button-primary:focus {
+/* input[type="button"].button-primary:focus {
   color: #FFF;
   background-color: #1EAEDB;
-  border-color: #1EAEDB; }
+  border-color: #1EAEDB; } */
 
 
 /* Forms
@@ -233,14 +234,14 @@ input[type="tel"],
 input[type="url"],
 input[type="password"],
 textarea,
-select {
+/* select {
   height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
   box-shadow: none;
-  box-sizing: border-box; }
+  box-sizing: border-box; } */
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
 input[type="number"],
@@ -265,9 +266,9 @@ input[type="tel"]:focus,
 input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
-select:focus {
+/* select:focus {
   border: 1px solid #33C3F0;
-  outline: 0; }
+  outline: 0; } */
 label,
 legend {
   display: block;
@@ -339,7 +340,8 @@ td:last-child {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 button,
 .button {
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  margin-right: 0.5rem; }
 input,
 textarea,
 select,
