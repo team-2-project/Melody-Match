@@ -77,6 +77,7 @@ var fetchAPI = function () {
           " by " +
           response.artists.hits[0].artist.name
       );
+      
       historyButton();
 
       // Call the Youtube API fetch within the shazam API so we can use the shazam variables inside youtube API
@@ -111,6 +112,7 @@ var fetchAPI = function () {
               h3Element.textContent = "Check out these other videos too!";
             }
           }
+          input.value = '';
         });
     })
     .catch((error) => {
@@ -146,7 +148,7 @@ var fetchAPI2 = function () {
     .then((response) => response.json())
     .then(function (response) {
       songTitle.textContent =
-        "The lyrics you searched for is " +
+        "The best match for your search is " +
         response.tracks.hits[0].track.title +
         " by " +
         response.artists.hits[0].artist.name;
