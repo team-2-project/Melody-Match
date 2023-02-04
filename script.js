@@ -10,8 +10,16 @@ var searchHx = document.querySelector("#search-history");
 var input = document.querySelector("#song-input");
 var allButtons = document.querySelectorAll("#search-history button");
 
+var options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "3bc0017a87msh1e4242be4f85c2cp173997jsnef2cc95fedfc",
+    "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+  },
+};
+
 var clearAll = function () {
-  while (mainVideo.childNodes.length > 1) {
+  while (mainVideo.childNodes.length > 0) {
     mainVideo.removeChild(mainVideo.lastChild);
   }
 
@@ -47,13 +55,6 @@ var fetchAPI = function () {
   var lyrics = input.value;
   console.log(lyrics);
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "3bc0017a87msh1e4242be4f85c2cp173997jsnef2cc95fedfc",
-      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-    },
-  };
 
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
@@ -136,14 +137,6 @@ clickSearch();
 var fetchAPI2 = function () {
   var lyrics = this.textContent;
   console.log(lyrics);
-
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "09856b1bb4mshb15ad6ca0c0115dp1507ecjsn5721aa7158e7",
-      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-    },
-  };
 
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
