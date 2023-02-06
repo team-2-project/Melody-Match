@@ -1,68 +1,120 @@
-
-
 body {
     background-color: #d9d9d9;
     }
 
 img {
-  width: 30%; /* Will shrink image to 30% of its original width */
-height: auto; 
-display: block;
-margin-left: auto;
-margin-right: auto;   
-margin-bottom: 20px;
+  width: 30%; 
+  height: auto; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;   
+  margin-bottom: 20px;
 }
 
-#album-art { /* Will shrink image to 30% of its original width */
+#album-art { 
   width: 20%;
   height: auto; 
-display: block;
-margin-left: auto;
-margin-right: auto
-
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 
-#search-btn {
-  margin: 50px 0 0 0;
-  cursor: pointer;
-  }
   
 #search-again {
   display:none;
   margin: 10px 0 10px 0;
-
 }
 
-#main-video {
-  margin-left: 20.83333333%;
+#song-info {
+  text-align: center;
 }
 input {
   background: rgba(255,255,255,0.4);
   border: none;
-  /* position: relative;
-  display: block; */
   outline: none;
-  width: 400px;
-  height: 20px;
+  height: 40px;
   top: 40px;
   margin: 50px 0 0 0;
   padding: 10px;
   color: #333;
   
-  
-  /* -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
-  box-shadow: 0px 2px 10px 1px rgba(0,0,0,0.5); */
 }
-#similar-videos h3 {
-  font-size: 3rem;
-}
+/* #similar-videos h3 {
+  font-size: 2rem;
+} */
 #song-input {
   margin: 0;
+  width: 80%
+  
 }
+.search-input {
+  display: flex;
+  justify-content: center;
+}
+
   ::-webkit-input-placeholder { color: #ff841b;} 
   :-moz-placeholder { color: #ff841b; }
   ::-moz-placeholder { color: #ff841b; }
   :-ms-input-placeholder { color: #ff841b; }
 
+#main-video {
+  height: 380px;
+}
 
+  input[type="button"]:hover{
+    color: #333333;
+    border-color: #000000;
+    background-color: #ff8c34;
+    outline: 0; }
 
+    #sim-vid-container {
+      display:flex;
+      
+      flex-direction: column;
+    }
+
+    #similar-videos {
+      display:flex;
+      flex-direction: row;
+      /* justify-content: space-between; */
+      flex-wrap: wrap;
+      gap: 1em;
+      
+
+    }
+    #similar-videos>* {
+      width:48%;
+    }
+
+#search-btn {
+      /* background-color: white;
+      border-color: #dbdbdb;
+      border-width: 1px;
+      color: #363636;
+      cursor: pointer;
+      justify-content: center;
+      padding-bottom: calc(0.5em - 1px);
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: calc(0.5em - 1px);
+      text-align: center;
+      white-space: nowrap; */
+      border-radius: 0;
+      box-shadow: none;
+      width:15%
+    }
+
+    #search-btn:focus, #search-btn.is-focused {
+      border-color: #ff811a;
+      color: #363636;
+    }
+    #search-btn:hover, #search-btn.is-hovered {
+      border-color: #b5b5b5;
+      background-color: #ff811a;
+      color: #363636;
+    }
+    @media screen and (min-width: 1024px) {
+      #main-video {
+      padding: 1rem 3rem;
+    }
+  }
