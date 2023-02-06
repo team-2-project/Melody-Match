@@ -2,7 +2,7 @@ var youtubeAPI = "AIzaSyCNYjluDnJK5CcflJ-sYsoRDzlUTNgLTo0";
 var button = document.querySelector("#search-btn");
 var mainVideo = document.querySelector("#main-video");
 var similarVideos = document.querySelector("#similar-videos");
-var h3Element = document.querySelector("#similar-videos h3");
+var h3Element = document.querySelector("#sim-vid-container h3");
 var songInfo = document.querySelector("#song-info");
 var songTitle = document.querySelector("#song-title");
 var album = document.querySelector("#album-art");
@@ -10,15 +10,8 @@ var searchHx = document.querySelector("#search-history");
 var input = document.querySelector("#song-input");
 var allButtons = document.querySelectorAll("#search-history button");
 
-var options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "3bc0017a87msh1e4242be4f85c2cp173997jsnef2cc95fedfc",
-    "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-  },
-};
-
 var clearAll = function () {
+  console.log("In clear all");
   while (mainVideo.childNodes.length > 0) {
     mainVideo.removeChild(mainVideo.lastChild);
   }
@@ -55,6 +48,14 @@ var fetchAPI = function () {
   var lyrics = input.value;
   console.log(lyrics);
 
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "3bc0017a87msh1e4242be4f85c2cp173997jsnef2cc95fedfc",
+      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+    },
+  };
+
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
       lyrics +
@@ -77,7 +78,6 @@ var fetchAPI = function () {
           " by " +
           response.artists.hits[0].artist.name
       );
-      
       historyButton();
 
       // Call the Youtube API fetch within the shazam API so we can use the shazam variables inside youtube API
@@ -105,14 +105,13 @@ var fetchAPI = function () {
               mainVideo.appendChild(iframe);
               var mainVideoIframe = mainVideo.lastElementChild;
 
-              mainVideoIframe.setAttribute("width", 560);
-              mainVideoIframe.setAttribute("height", 330);
+              mainVideoIframe.setAttribute("width", "100%");
+              mainVideoIframe.setAttribute("height", "100%");
             } else {
               similarVideos.appendChild(iframe);
               h3Element.textContent = "Check out these other videos too!";
             }
           }
-          input.value = '';
         });
     })
     .catch((error) => {
@@ -139,6 +138,14 @@ var fetchAPI2 = function () {
   var lyrics = this.textContent;
   console.log(lyrics);
 
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "3bc0017a87msh1e4242be4f85c2cp173997jsnef2cc95fedfc",
+      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+    },
+  };
+
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
       lyrics +
@@ -148,7 +155,7 @@ var fetchAPI2 = function () {
     .then((response) => response.json())
     .then(function (response) {
       songTitle.textContent =
-        "The best match for your search is " +
+        "The lyrics you searched for is " +
         response.tracks.hits[0].track.title +
         " by " +
         response.artists.hits[0].artist.name;
@@ -187,8 +194,8 @@ var fetchAPI2 = function () {
               mainVideo.appendChild(iframe);
               var mainVideoIframe = mainVideo.lastElementChild;
 
-              mainVideoIframe.setAttribute("width", 560);
-              mainVideoIframe.setAttribute("height", 330);
+              mainVideoIframe.setAttribute("width", "100%");
+              mainVideoIframe.setAttribute("height", "100%");
             } else {
               similarVideos.appendChild(iframe);
               h3Element.textContent = "Check out these other videos too!";

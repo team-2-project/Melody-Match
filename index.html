@@ -5,79 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="skeleton.css" />
+    <!-- <link rel="stylesheet" href="skeleton.css" /> -->
     <!-- <link rel="stylesheet" href="normalize.css"> -->
+    <link rel="stylesheet" href="bulma.css" />
     <title>MelodyMatch - Find your beat</title>
   </head>
   <body>
-    <div class="container">
-      <!--Header and icon-->
-      <div class="row">
-        <header>
-          <img src="./assets/logo.png" alt="Melody Match logo" />
-        </header>
+    <header class="section">
+      <img src="./assets/logo.png" alt="Melody Match logo" />
+      <div class="search-input column is-half is-offset-one-quarter">
+        <input
+          placeholder="Search for the lyrics in your mind..."
+          id="song-input"
+        />
+        <button type="submit" class="button" id="search-btn">Search</button>
       </div>
-      <!--Search bars
-
-<div class="searchbar">
-    
-    <p><input type="text" placeholder="Search for your favourite artist..."/></p>
-    <p><input type="text" placeholder="Search for your favourite song..."/></p>
-  </div>
-
--->
-
-      <!--<div class="font-sans text-black min-h-screen bg-white flex items-center justify-center">
-    <div class="border rounded overflow-hidden flex">
-      <input type="text" class="px-4 py-2" placeholder="Search for your favourite song...">
-      <button class="flex items-center justify-center px-4 border-l">     
-      </button>
-    </div>
-  </div> -->
-
-      <!--<div class="font-sans text-black min-h-screen bg-white flex items-center justify-center">
-    <div class="border rounded overflow-hidden flex">
-      <input type="text" class="px-4 py-2" placeholder="Search for your favourite artist...">
-      <button class="flex items-center justify-center px-4 border-l">     
-      </button>
-    </div>
-  </div>-->
-
-      <!-- <div class="row">
-    
-      <input class="gkgkl" type="email" placeholder="Search for the lyrics in your mind..." id="exampleEmailInput">
-      <button class=" button-primary">Button element</button>
-      
-    </div>   -->
-      <div class="row">
-        <div class="search-input offset-by-three column">
-          <input
-            placeholder="Search for the lyrics in your mind..."
-            id="song-input"
-          />
-          <button type="submit" class="button" id="search-btn">Search</button>
-        </div>
+      <div
+        id="search-history"
+        class="column is-three-fifths is-offset-one-fifth"
+      >
+        <p id="search-again">Search again:</p>
       </div>
-      <main>
-        <div id="search-history">
-          <p id="search-again">Search again:</p>
-        </div>
+    </header>
 
-        <div id="song-info">
-          <h2 id="song-title" class="offset-by-one column"></h2>
-          <div class="row">
-            <img class="twelve column" id="album-art" />
-          </div>
-        </div>
+    <main>
+      <div id="song-info" class="content section">
+        <h2
+          id="song-title"
+          class="column is-three-fifths is-offset-one-fifth"
+        ></h2>
 
-        <div id="main-video"></div>
+        <img id="album-art" />
+      </div>
 
-        <div id="similar-videos">
+      <div
+        id="main-video"
+        class="column is-half is-offset-one-quarter section"
+      ></div>
+
+      <div
+        id="sim-vid-container"
+        class="column is-half is-offset-one-quarter section"
+      >
+        <div class="content">
           <h3></h3>
         </div>
-      </main>
 
-      <script src="script.js"></script>
-    </div>
+        <div id="similar-videos"></div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
