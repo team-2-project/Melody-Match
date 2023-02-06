@@ -16,7 +16,7 @@ var clearAll = function () {
     mainVideo.removeChild(mainVideo.lastChild);
   }
 
-  while (similarVideos.childNodes.length > 2) {
+  while (similarVideos.childNodes.length > 0) {
     similarVideos.removeChild(similarVideos.lastChild);
   }
 
