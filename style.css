@@ -118,7 +118,7 @@ input {
       padding: 1rem 3rem;
     }
   }
-  .modal {
+.modal, .modal-error {
     position: fixed!important;
     width: 100%!important;
     height: 100vh!important;
@@ -136,6 +136,11 @@ input {
   }
   
   .modal-active {
+    visibility: visible!important;
+    opacity: 1!important;
+  }
+
+  .modal-active-error {
     visibility: visible!important;
     opacity: 1!important;
   }
