@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyCNYjluDnJK5CcflJ-sYsoRDzlUTNgLTo0";
+var youtubeAPI = "AIzaSyDu5NK2sFBZqTlajlTahkxESexj0EboIJ8";
 
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
 
@@ -15,9 +15,12 @@ var allButtons = document.querySelectorAll("#search-history button");
 
 var modal = document.querySelector(".modal");
 var modalError = document.querySelector(".modal-error")
+
 var modalCloseBlank = document.querySelector(".modal .modal-box button");
 var modalCloseError = document.querySelector("#modal-error-btn");
 
+var modalAPI = document.querySelector(".modal-api-error");
+var modalAPIBtn = document.querySelector("#modal-api-btn");
 var lyricsHREF = document.querySelector("#lyrics");
 
 var options = {
@@ -70,7 +73,6 @@ var modalPopup = function () {
   });
 };
 
-
 // Modal for when user input is INVALID
 var modalErrorPopup = function () {
   modalError.classList.add("modal-active-error")
@@ -78,6 +80,15 @@ var modalErrorPopup = function () {
     modalCloseError.addEventListener("click", function () {
       modalError.classList.remove("modal-active-error");
   });
+}
+
+// Modal for when api quota reached
+var modalAPIError = function () {
+  modalAPI.classList.add("modal-active-api")
+
+  modalAPIBtn.addEventListener("click", function () {
+    modalAPI.classList.remove("modal-active-api");
+});
 }
 
 
@@ -150,8 +161,16 @@ var fetchAPI = function () {
           "&type=video&key=" +
           youtubeAPI
       )
-        .then((response) => response.json())
+        .then((response) =>  response.json())
         .then((data) => {
+          console.log(data);
+          console.log(data.error.code)
+
+          if (data.error.code == 403) {
+            modalAPIError();
+            return;
+          }
+
           var mainYoutubeLink = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
           var iframe = document.createElement("iframe");
           iframe.setAttribute("src", mainYoutubeLink);
