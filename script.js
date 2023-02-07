@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyDu5NK2sFBZqTlajlTahkxESexj0EboIJ8";
+var youtubeAPI = "AIzaSyD7nJxKnVnhFHxNBUFHLydxK245aU2usOM";
 
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
 
@@ -19,8 +19,6 @@ var modalError = document.querySelector(".modal-error")
 var modalCloseBlank = document.querySelector(".modal .modal-box button");
 var modalCloseError = document.querySelector("#modal-error-btn");
 
-var modalAPI = document.querySelector(".modal-api-error");
-var modalAPIBtn = document.querySelector("#modal-api-btn");
 var lyricsHREF = document.querySelector("#lyrics");
 
 var options = {
@@ -82,16 +80,6 @@ var modalErrorPopup = function () {
   });
 }
 
-// Modal for when api quota reached
-var modalAPIError = function () {
-  modalAPI.classList.add("modal-active-api")
-
-  modalAPIBtn.addEventListener("click", function () {
-    modalAPI.classList.remove("modal-active-api");
-});
-}
-
-
 // This function calls upon the shazam api first to get the search results of the lyrics and then within the same scope, calls the youtube api and inserts the found song + artist to the youtube search for more accuracy
 var fetchAPI = function () {
   var lyrics = input.value;
@@ -109,11 +97,11 @@ var fetchAPI = function () {
     options
   )
   .then(response => {
-    console.log(response);
     return response.json();
   })
     .then(function (response) {
-
+      console.log(response);
+      
       // If unable to find any tracks, modal pop up
       if (response.tracks === undefined) {
         modalErrorPopup();
@@ -123,7 +111,6 @@ var fetchAPI = function () {
       // Had to move the clearAll function here after the modalErrorpopup function or else it would call the clearall regardless. When placed here, and modalerror function activates, the clearAll function will not.
        clearAll();
 
-      console.log(response);
 
       songTitle.textContent =
         "The best match for your search is " +
@@ -164,13 +151,7 @@ var fetchAPI = function () {
         .then((response) =>  response.json())
         .then((data) => {
           console.log(data);
-          console.log(data.error.code)
-
-          if (data.error.code == 403) {
-            modalAPIError();
-            return;
-          }
-
+  
           var mainYoutubeLink = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
           var iframe = document.createElement("iframe");
           iframe.setAttribute("src", mainYoutubeLink);
@@ -245,13 +226,6 @@ var fetchAPIHISTORY = function () {
 
       album.src = response.artists.hits[0].artist.avatar;
 
-      // Call the saveHistory function to save track and artist to localStorage
-      // Not sure if need this
-      saveHistory(
-        response.tracks.hits[0].track.title +
-          " by " +
-          response.artists.hits[0].artist.name
-      );
 
       fetch("https://api.genius.com/search?q=" + response.artists.hits[0].artist.name + response.tracks.hits[0].track.title + "&access_token=" + geniusToken)
       .then(response => response.json())
