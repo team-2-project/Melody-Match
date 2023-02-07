@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyCNYjluDnJK5CcflJ-sYsoRDzlUTNgLTo0";
+var youtubeAPI = "AIzaSyCH8pHwOvsXpO2ehkppHV1WZSJYgoj_wnU";
 var button = document.querySelector("#search-btn");
 var mainVideo = document.querySelector("#main-video");
 var similarVideos = document.querySelector("#similar-videos");
@@ -9,6 +9,8 @@ var album = document.querySelector("#album-art");
 var searchHx = document.querySelector("#search-history");
 var input = document.querySelector("#song-input");
 var allButtons = document.querySelectorAll("#search-history button");
+var modal = document.querySelector(".modal");
+var modalClose = document.querySelectorAll(".modal-box button");
 
 var clearAll = function () {
   console.log("In clear all");
@@ -42,12 +44,24 @@ var historyButton = function () {
   document.getElementById("search-again").style.display = "block";
   searchHx.appendChild(buttonEl);
 };
+var modalPopup = function () {
+  modal.classList.add("modal-active");
+};
 
+modalClose.forEach(function (modalButtons) {
+  modalButtons.addEventListener("click", function () {
+    modal.classList.remove("modal-active");
+  });
+});
 // This function calls upon the shazam api first to get the search results of the lyrics and then within the same scope, calls the youtube api and inserts the found song + artist to the youtube search for more accuracy
 var fetchAPI = function () {
   var lyrics = input.value;
   console.log(lyrics);
-
+  if (lyrics === "") {
+    modalPopup();
+    return;
+  }
+  clearAll();
   const options = {
     method: "GET",
     headers: {
