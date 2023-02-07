@@ -1,5 +1,7 @@
 var youtubeAPI = "AIzaSyCH8pHwOvsXpO2ehkppHV1WZSJYgoj_wnU";
+
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
+
 var button = document.querySelector("#search-btn");
 var mainVideo = document.querySelector("#main-video");
 var similarVideos = document.querySelector("#similar-videos");
@@ -10,6 +12,10 @@ var album = document.querySelector("#album-art");
 var searchHx = document.querySelector("#search-history");
 var input = document.querySelector("#song-input");
 var allButtons = document.querySelectorAll("#search-history button");
+
+var modal = document.querySelector(".modal");
+var modalClose = document.querySelectorAll(".modal-box button");
+
 var lyricsHREF = document.querySelector("#lyrics");
 
 var options = {
@@ -19,6 +25,7 @@ var options = {
     "X-RapidAPI-Host": "shazam.p.rapidapi.com",
   },
 };
+
 
 
 var clearAll = function () {
@@ -53,6 +60,17 @@ var historyButton = function () {
   document.getElementById("search-again").style.display = "block";
   searchHx.appendChild(buttonEl);
 };
+var modalPopup = function () {
+  modal.classList.add("modal-active");
+};
+
+
+modalClose.forEach(function (modalButtons) {
+  modalButtons.addEventListener("click", function () {
+    modal.classList.remove("modal-active");
+  });
+});
+
 
 
 
@@ -61,7 +79,13 @@ var fetchAPI = function () {
   var lyrics = input.value;
   console.log(lyrics);
 
-   clearAll();
+  if (lyrics === "") {
+    modalPopup();
+    return;
+  }
+  clearAll();
+ 
+
 
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
