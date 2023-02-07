@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyCH8pHwOvsXpO2ehkppHV1WZSJYgoj_wnU";
+var youtubeAPI = "AIzaSyDu5NK2sFBZqTlajlTahkxESexj0EboIJ8";
 
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
 
@@ -14,8 +14,13 @@ var input = document.querySelector("#song-input");
 var allButtons = document.querySelectorAll("#search-history button");
 
 var modal = document.querySelector(".modal");
-var modalClose = document.querySelectorAll(".modal-box button");
+var modalError = document.querySelector(".modal-error")
 
+var modalCloseBlank = document.querySelector(".modal .modal-box button");
+var modalCloseError = document.querySelector("#modal-error-btn");
+
+var modalAPI = document.querySelector(".modal-api-error");
+var modalAPIBtn = document.querySelector("#modal-api-btn");
 var lyricsHREF = document.querySelector("#lyrics");
 
 var options = {
@@ -25,8 +30,6 @@ var options = {
     "X-RapidAPI-Host": "shazam.p.rapidapi.com",
   },
 };
-
-
 
 var clearAll = function () {
   console.log("In clear all");
@@ -56,36 +59,48 @@ var historyButton = function () {
 
   buttonEl.textContent = buttonContent;
   buttonEl.addEventListener("click", clearAll);
-  buttonEl.addEventListener("click", fetchAPI2);
+  buttonEl.addEventListener("click", fetchAPIHISTORY);
   document.getElementById("search-again").style.display = "block";
   searchHx.appendChild(buttonEl);
 };
+
+// Modal for when user input is BLANK
 var modalPopup = function () {
   modal.classList.add("modal-active");
+
+  modalCloseBlank.addEventListener("click", function () {
+      modal.classList.remove("modal-active");
+  });
 };
 
+// Modal for when user input is INVALID
+var modalErrorPopup = function () {
+  modalError.classList.add("modal-active-error")
 
-modalClose.forEach(function (modalButtons) {
-  modalButtons.addEventListener("click", function () {
-    modal.classList.remove("modal-active");
+    modalCloseError.addEventListener("click", function () {
+      modalError.classList.remove("modal-active-error");
   });
+}
+
+// Modal for when api quota reached
+var modalAPIError = function () {
+  modalAPI.classList.add("modal-active-api")
+
+  modalAPIBtn.addEventListener("click", function () {
+    modalAPI.classList.remove("modal-active-api");
 });
-
-
+}
 
 
 // This function calls upon the shazam api first to get the search results of the lyrics and then within the same scope, calls the youtube api and inserts the found song + artist to the youtube search for more accuracy
 var fetchAPI = function () {
   var lyrics = input.value;
-  console.log(lyrics);
 
+  // If input is blank, modal pop up
   if (lyrics === "") {
     modalPopup();
     return;
   }
-  clearAll();
- 
-
 
   fetch(
     "https://shazam.p.rapidapi.com/search?term=" +
@@ -93,9 +108,23 @@ var fetchAPI = function () {
       "&locale=en-US&offset=0&limit=5",
     options
   )
-    .then((response) => response.json())
+  .then(response => {
+    console.log(response);
+    return response.json();
+  })
     .then(function (response) {
+
+      // If unable to find any tracks, modal pop up
+      if (response.tracks === undefined) {
+        modalErrorPopup();
+        return;
+      }
+
+      // Had to move the clearAll function here after the modalErrorpopup function or else it would call the clearall regardless. When placed here, and modalerror function activates, the clearAll function will not.
+       clearAll();
+
       console.log(response);
+
       songTitle.textContent =
         "The best match for your search is " +
         response.tracks.hits[0].track.title +
@@ -110,23 +139,21 @@ var fetchAPI = function () {
           " by " +
           response.artists.hits[0].artist.name
       );
+
       historyButton();
 
+      // Calling Genius API within the Shazam fetch so we can use the Shazam results as parameters to Genius API
       fetch("https://api.genius.com/search?q=" + response.artists.hits[0].artist.name + response.tracks.hits[0].track.title + "&access_token=" + geniusToken)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    lyricsHREF.setAttribute("href", data.response.hits[0].result.url)
-  })
-  .catch(error => {
-    console.error(error);
-  });
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        lyricsHREF.setAttribute("href", data.response.hits[0].result.url)
+      })
+      .catch(error => {
+          console.error(error);
+      });
       
-    
-
-      // Call the Youtube API fetch within the shazam API so we can use the shazam variables inside youtube API
-    
-        console.log(response.tracks.hits.length)
+      // Also calling Youtube API within shazam fetch
       fetch(
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
           response.tracks.hits[0].track.title +
@@ -134,108 +161,54 @@ var fetchAPI = function () {
           "&type=video&key=" +
           youtubeAPI
       )
-        .then((response) => response.json())
+        .then((response) =>  response.json())
         .then((data) => {
           console.log(data);
-          
-          console.log(response.tracks.hits[0].track.title)
+          console.log(data.error.code)
 
-       
-            var mainYoutubeLink = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
-            var iframe = document.createElement("iframe");
-          
-           
-              iframe.setAttribute("src", mainYoutubeLink);
-              mainVideo.appendChild(iframe);
-              var mainVideoIframe = mainVideo.lastElementChild;
-          
-              mainVideoIframe.setAttribute("width", "100%");
-              mainVideoIframe.setAttribute("height", "100%");
+          if (data.error.code == 403) {
+            modalAPIError();
+            return;
+          }
+
+          var mainYoutubeLink = "https://www.youtube.com/embed/" + data.items[0].id.videoId;
+          var iframe = document.createElement("iframe");
+          iframe.setAttribute("src", mainYoutubeLink);
+          mainVideo.appendChild(iframe);
+
+          var mainVideoIframe = mainVideo.lastElementChild;
+          mainVideoIframe.setAttribute("width", "100%");
+          mainVideoIframe.setAttribute("height", "100%");
             
+          // Clears the input field
           input.value = '';
         })
 
-
+        // Start i = 1 because i = 0 would be the same as main video
+      for (let i = 1; i < response.tracks.hits.length; i++) {
         fetch(
           "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
-            response.tracks.hits[1].track.title +
-            response.artists.hits[1].artist.name +
+            response.tracks.hits[i].track.title +
+            response.artists.hits[i].artist.name +
             "&type=video&key=" +
             youtubeAPI
         )
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            
        
             var iframe = document.createElement("iframe");
-            var suggestedYoutubeLinks = 'https://www.youtube.com/embed/' + data.items[0].id.videoId
+            var suggestedYoutubeLinks = 'https://www.youtube.com/embed/' + data.items[i].id.videoId
             iframe.setAttribute("src",  suggestedYoutubeLinks);
-              similarVideos.appendChild(iframe);
-              h3Element.textContent = "Check out these other videos too!";
+            similarVideos.appendChild(iframe);
+            h3Element.textContent = "Check out these other videos too!";
             input.value = '';
           })
-
-          fetch(
-            "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
-              response.tracks.hits[2].track.title +
-              response.artists.hits[2].artist.name +
-              "&type=video&key=" +
-              youtubeAPI
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data);
-    
-              var iframe = document.createElement("iframe");
-              var suggestedYoutubeLinks = 'https://www.youtube.com/embed/' + data.items[0].id.videoId
-              iframe.setAttribute("src",  suggestedYoutubeLinks);
-                similarVideos.appendChild(iframe);
-                h3Element.textContent = "Check out these other videos too!";
-              input.value = '';
-            })
-
-            fetch(
-              "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
-                response.tracks.hits[3].track.title +
-                response.artists.hits[3].artist.name +
-                "&type=video&key=" +
-                youtubeAPI
-            )
-              .then((response) => response.json())
-              .then((data) => {
-                console.log(data);
-                
-                console.log(response.tracks.hits[0].track.title)
-      
-                var iframe = document.createElement("iframe");
-                var suggestedYoutubeLinks = 'https://www.youtube.com/embed/' + data.items[0].id.videoId
-                iframe.setAttribute("src",  suggestedYoutubeLinks);
-                  similarVideos.appendChild(iframe);
-                  h3Element.textContent = "Check out these other videos too!";
-              
-              })
-
-              fetch(
-                "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
-                  response.tracks.hits[4].track.title +
-                  response.artists.hits[4].artist.name +
-                  "&type=video&key=" +
-                  youtubeAPI
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  var iframe = document.createElement("iframe");
-                  var suggestedYoutubeLinks = 'https://www.youtube.com/embed/' + data.items[0].id.videoId
-                  iframe.setAttribute("src",  suggestedYoutubeLinks);
-                    similarVideos.appendChild(iframe);
-                    h3Element.textContent = "Check out these other videos too!";
-                })
+      }
     })
-    
     .catch((error) => {
       console.error("Error:", error);
-    });
+    })
 };
 
 // This function clears all the fields and then calls the fetchAPI function
@@ -252,7 +225,7 @@ var clickSearch = function () {
 clickSearch();
 
 // I just duplicated this function with the 'this' keyword cause I can't figure out how to consolidate it yet. !!!! TBD !!!!
-var fetchAPI2 = function () {
+var fetchAPIHISTORY = function () {
   var lyrics = this.textContent;
   console.log(lyrics);
 
@@ -273,6 +246,7 @@ var fetchAPI2 = function () {
       album.src = response.artists.hits[0].artist.avatar;
 
       // Call the saveHistory function to save track and artist to localStorage
+      // Not sure if need this
       saveHistory(
         response.tracks.hits[0].track.title +
           " by " +
@@ -289,21 +263,13 @@ var fetchAPI2 = function () {
         console.error(error);
       });
 
-
-
       // Call the Youtube API fetch within the shazam API so we can use the shazam variables inside youtube API
       return fetch(
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +
-          response.tracks.hits[0].track.title +
-          response.artists.hits[0].artist.name +
-          "&type=video&key=" +
-          youtubeAPI
-      )
-        .then((response) => response.json())
+          response.tracks.hits[0].track.title + response.artists.hits[0].artist.name + "&type=video&key=" + youtubeAPI
+      ).then((response) => response.json())
         .then((data) => {
-          console.log(data);
 
-          // loops through all the data items
           for (let i = 0; i < data.items.length; i++) {
             var youtubeLink =
               "https://www.youtube.com/embed/" + data.items[i].id.videoId;
