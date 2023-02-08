@@ -135,6 +135,7 @@ var fetchAPI = function () {
       .then(data => {
         console.log(data);
         lyricsHREF.setAttribute("href", data.response.hits[0].result.url)
+        lyricsHREF.style.display = "flex";
       })
       .catch(error => {
           console.error(error);
@@ -232,6 +233,7 @@ var fetchAPIHISTORY = function () {
       .then(data => {
         console.log(data);
         lyricsHREF.setAttribute("href", data.response.hits[0].result.url)
+        lyricsHREF.style.display = 'flex';
       })
       .catch(error => {
         console.error(error);
