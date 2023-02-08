@@ -24,7 +24,7 @@ var lyricsHREF = document.querySelector("#lyrics");
 var options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "3bc0017a87msh1e4242be4f85c2cp173997jsnef2cc95fedfc",
+    "X-RapidAPI-Key": "ce99229af8msh04ced6b7af9192fp1e95dajsndc1f711b9937",
     "X-RapidAPI-Host": "shazam.p.rapidapi.com",
   },
 };
