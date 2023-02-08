@@ -161,3 +161,8 @@ input {
     cursor: pointer!important;
   }
   
+
+#lyrics {
+  display: none;
+  justify-content: center;
+}
