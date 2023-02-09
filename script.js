@@ -222,7 +222,7 @@ var fetchAPIHISTORY = function () {
     .then((response) => response.json())
     .then(function (response) {
       songTitle.textContent =
-        "The lyrics you searched for is " +
+        "The best match for your search is " +
         response.tracks.hits[0].track.title +
         " by " +
         response.artists.hits[0].artist.name;
