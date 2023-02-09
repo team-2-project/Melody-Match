@@ -64,7 +64,13 @@ var historyButton = function () {
 
 // Show the user's last search result from localStorage
 window.onload = function () {
-  historyButton();
+  var storageHistory = buttonText();
+  if (storageHistory.length === 0) {
+    return
+  } else {
+    historyButton();
+  }
+  
 }
 
 // Modal for when user input is BLANK
