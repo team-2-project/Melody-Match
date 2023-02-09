@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="skeleton.css" /> -->
+    <!-- <link rel="stylesheet" href="normalize.css"> -->
+    <link rel="stylesheet" href="bulma.css" />
+    <title>MelodyMatch - Find your beat</title>
+  </head>
+  <body>
+    <header class="section">
+      <img src="./assets/logo.png" alt="Melody Match logo" />
+      <div class="search-input column is-half is-offset-one-quarter">
+        <input
+          placeholder="Search for the lyrics in your mind..."
+          id="song-input"
+        />
+        <button type="submit" class="button" id="search-btn">Search</button>
+      </div>
+      <div
+        id="search-history"
+        class="column is-three-fifths is-offset-one-fifth"
+      >
+        <p id="search-again">Search again:</p>
+      </div>
+    </header>
+
+    <main>
+      <div id="song-info" class="content section">
+        <h2
+          id="song-title"
+          class="column is-three-fifths is-offset-one-fifth"
+        ></h2>
+
+        <img id="album-art" />
+      </div>
+
+      <div>
+        <a id="lyrics" href="" target="_blank">Click here for lyrics!</a>
+      </div>
+
+      <div
+        id="main-video"
+        class="column is-half is-offset-one-quarter section"
+      ></div>
+
+      <div
+        id="sim-vid-container"
+        class="column is-half is-offset-one-quarter section"
+      >
+        <div class="content">
+          <h3></h3>
+        </div>
+
+        <div id="similar-videos"></div>
+      </div>
+    </main>
+    <div class="modal">
+      <div class="modal-box">
+        <p>
+          Please enter some lyrics in the search or we won't know what to look
+          up!
+        </p>
+        <button>Okay</button>
+      </div>
+    </div>
+
+    <div class="modal-error">
+      <div class="modal-box">
+        <p>Sorry, we could not find a match to your lyrics! Try again.</p>
+        <button id="modal-error-btn">Okay</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
