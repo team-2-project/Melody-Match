@@ -42,10 +42,14 @@ THEN the page will output an album art, link to the lyrics, the music video and 
 - Genius API : https://docs.genius.com/
 
 
-## Screenshot
+## Screenshot & Demo
 
 ![project-1-1](https://user-images.githubusercontent.com/48407721/217679155-bde67097-ec4c-4c09-9129-88dd79155687.PNG)
 
+
+Demo showing all functionalities and technical criteria of application:
+
+https://user-images.githubusercontent.com/89812084/217897386-ffb789b0-0163-49f8-a17b-d6210e02071f.mp4
 
 ## Deployment link
 
