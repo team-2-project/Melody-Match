@@ -1,4 +1,7 @@
 # MelodyMatch Team 2 Coding Crusaders
+
+![melody-match-logo](https://user-images.githubusercontent.com/48407721/217678994-cfb03c8a-5ea6-4131-9ccd-b800e163e9e1.png)
+
 ## Description
 This project acts as a lyric and song finder, where the user should be able to find the lyrics/title of the song, and related information as desired.
 
@@ -33,12 +36,15 @@ THEN the page will output an album art, link to the lyrics, the music video and 
 - CSS: Bulma
 - JavaScript
 - APIs used: 
-> Shazam API : https://rapidapi.com/apidojo/api/shazam
-> YouTube API : https://developers.google.com/youtube/v3
-> Genius API : https://docs.genius.com/
+
+- Shazam API : https://rapidapi.com/apidojo/api/shazam
+- YouTube API : https://developers.google.com/youtube/v3
+- Genius API : https://docs.genius.com/
 
 
 ## Screenshot
+
+![project-1-1](https://user-images.githubusercontent.com/48407721/217679155-bde67097-ec4c-4c09-9129-88dd79155687.PNG)
 
 
 ## Deployment link
