@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyCH8pHwOvsXpO2ehkppHV1WZSJYgoj_wnU";
+var youtubeAPI = "AIzaSyDu5NK2sFBZqTlajlTahkxESexj0EboIJ8";
 
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
 
@@ -61,6 +61,11 @@ var historyButton = function () {
   document.getElementById("search-again").style.display = "block";
   searchHx.appendChild(buttonEl);
 };
+
+// Show the user's last search result from localStorage
+window.onload = function () {
+  historyButton();
+}
 
 // Modal for when user input is BLANK
 var modalPopup = function () {
