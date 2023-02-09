@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyDu5NK2sFBZqTlajlTahkxESexj0EboIJ8";
+var youtubeAPI = "AIzaSyCNYjluDnJK5CcflJ-sYsoRDzlUTNgLTo0";
 
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
 
