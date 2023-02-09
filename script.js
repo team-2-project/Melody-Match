@@ -1,4 +1,4 @@
-var youtubeAPI = "AIzaSyD7nJxKnVnhFHxNBUFHLydxK245aU2usOM";
+var youtubeAPI = "AIzaSyCH8pHwOvsXpO2ehkppHV1WZSJYgoj_wnU";
 
 var geniusToken = "TKNKtVG41FCOucKBEivHvEvMWkmKRnnv6xsNE3q2osdeTPu3-8KpkfLIcMZ0vScy"
 
@@ -108,9 +108,7 @@ var fetchAPI = function () {
         return;
       }
 
-      // Had to move the clearAll function here after the modalErrorpopup function or else it would call the clearall regardless. When placed here, and modalerror function activates, the clearAll function will not.
        clearAll();
-
 
       songTitle.textContent =
         "The best match for your search is " +
@@ -206,7 +204,7 @@ var clickSearch = function () {
 
 clickSearch();
 
-// I just duplicated this function with the 'this' keyword cause I can't figure out how to consolidate it yet. !!!! TBD !!!!
+
 var fetchAPIHISTORY = function () {
   var lyrics = this.textContent;
   console.log(lyrics);
