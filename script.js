@@ -62,6 +62,7 @@ var historyButton = function () {
   searchHx.appendChild(buttonEl);
 };
 
+// Show the user's last search result from localStorage
 window.onload = function () {
   historyButton();
 }
